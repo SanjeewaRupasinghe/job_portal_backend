@@ -8,5 +8,3 @@ Route::get('/', function () {
 });
 
 Route::get('logs', [LogViewerController::class, 'index']);
-
-require __DIR__.'/auth.php';
