@@ -23,10 +23,11 @@ class RegisteredUserController extends Controller
         // validate request
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
-            'last_name'  => ['required', 'string', 'max:255'],
+            'last_name'  => ['string', 'max:255'],
             'email'      => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'phone'      => ['required', 'string', 'max:255', 'unique:' . User::class],
             'password'   => ['required', 'confirmed', Rules\Password::defaults()],
+            'role'       => ['required', 'string', 'in:candidate,employer,admin'],
         ]);
 
         // create user
@@ -47,7 +48,7 @@ class RegisteredUserController extends Controller
         // return response
         return response()->json([
             'message' => 'User registered successfully',
-            'user'    => $user,
+            'data'    => $user,
         ], 201);
     }
 }
